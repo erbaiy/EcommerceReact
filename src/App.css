@@ -1,0 +1,50 @@
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuBar {
+  display: flex;
+  padding: 0.5rem;
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dark .menuBar {
+  background-color: #1e293b;
+  border-bottom-color: #4b5563;
+}
+
+.menuBar button {
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.dark .menuBar button {
+  background-color: #4b5563;
+  color: #e5e7eb;
+}
+
+.menuBar button:hover {
+  background-color: #d1d5db;
+}
+
+.dark .menuBar button:hover {
+  background-color: #6b7280;
+}
+
+.menuBar button.is-active {
+  background-color: #60a5fa;
+  color: white;
+}
+
+.dark .menuBar button.is-active {
+  background-color: #3b82f6;
+}
+
+.ProseMirror:focus {
+  outline: none;
+}
