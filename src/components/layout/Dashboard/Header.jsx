@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Moon, Sun, Laptop, Bell, Search, Menu } from "lucide-react";
 import Dropdown from "./Dropdown";
-import logo from "../../../assets/img/logo-dark.svg"; // Adjust the path as necessary
+import logo from "../../../assets/img/app-illustration.svg"; // Adjust the path as necessary
 
-const Header = () => {
+const Header = ({toggleSidebar }) => {
   // State management
   const [searchActive, setSearchActive] = useState(false);
   const [theme, setTheme] = useState('light');
@@ -28,12 +28,13 @@ const Header = () => {
               </span>
             </Link>
             <button
-              type="button"
-              className="ml-3 p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary"
-              aria-label="Toggle Menu"
-            >
-              <Menu size="20" />
-            </button>
+    type="button"
+    className="ml-3 p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary"
+    onClick={toggleSidebar}
+    aria-label="Toggle Menu"
+  >
+    <Menu size="20" />
+  </button>
           </div>
 
           {/* Right side controls */}
@@ -187,7 +188,7 @@ const Header = () => {
                 button={(
                   <img
                     className="w-9 h-9 rounded-full object-cover saturate-50 group-hover:saturate-100"
-                    src="/assets/images/user-profile.jpeg"
+                    src={logo}
                     alt="User profile"
                   />
                 )}

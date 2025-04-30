@@ -6,6 +6,8 @@ import axiosInstance from "../config/axios";
 import ProductForm from "../components/ProductForm";
 import staticImg from "../assets/img/security-illustration.svg";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/img/no-product.png";
+
 
 const DEFAULT_IMAGE = staticImg;
 
@@ -414,9 +416,7 @@ const ProductList = ({ products, viewMode, onEdit, onDelete, onCheckout, t }) =>
 
   if (products.length === 0) {
     return (
-      <div className="text-center py-10">
-        <p className="text-gray-500 dark:text-gray-400">{t("No products found.")}</p>
-      </div>
+      <NoProductFound/>
     );
   }
 
@@ -573,6 +573,30 @@ const ProductListItem = ({ product, onEdit, onDelete, onCheckout, imgError, setI
       </div>
     </div>
   );
+
+
+
+  
 };
 
+
+ const NoProductFound = () => {
+  return (
+    <section className="py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center justify-center">
+          <div className="text-center lg:text-left lg:w-1/2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Oops
+            </h1>
+            <p className="text-gray-500 dark:text-gray-300">
+              No products found. Please try again later.
+            </p>
+          </div>
+        
+        </div>
+      </div>
+    </section>
+  );
+}; 
 export default Products;

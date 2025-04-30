@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AnimateHeight from "react-animate-height";
+import logo from "../../../assets/img/logo.png";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   // State management
-  const [activeMenu, setActiveMenu] = useState("");
+  const [activeMenu, setActiveMenu] = useState("dashboard"); // Set dashboard open by default
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { t } = useTranslation();
 
@@ -46,17 +47,17 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           <NavLink to="/" className="flex items-center shrink-0">
             <img
               className="w-8 flex-none"
-              src="/assets/images/logo.svg"
+              src={logo}
               alt="logo"
             />
             {!isCollapsed && (
               <span className="text-2xl ml-1.5 font-semibold dark:text-white-light">
-                {t("FoodFlow")}
+                {t("E-commerce")}
               </span>
             )}
           </NavLink>
 
-          <button
+          <button 
             type="button"
             className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-500/10 
               dark:hover:bg-dark-light/10 dark:text-white-light transition duration-300"
@@ -91,8 +92,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Scrollable menu content */}
-        <div className="h-[calc(100vh-80px)] overflow-y-auto scroll-container">
-          <ul className="relative font-semibold space-y-0.5 p-4 py-0">
+        <div 
+             
+            className="h-[calc(100vh-80px)] overflow-y-auto scroll-container">
+          <ul style={{ height: "100%" }} className="relative font-semibold space-y-1 p-4">
             {/* Dashboard menu item */}
             <li className="menu nav-item">
               <button
@@ -148,26 +151,26 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 )}
               </button>
 
-              {/* Submenu items with animation */}
+              {/* Submenu items with animation - open by default */}
               <AnimateHeight
                 duration={300}
                 height={activeMenu === "dashboard" ? "auto" : 0}
               >
-                <ul className="sub-menu text-gray-500 space-y-1 pl-[28px]">
+               <ul className="sub-menu text-gray-500 space-y-1 mt-2 list-none">
+                 <li>
+                   <NavLink
+                     to="dashboard/products"
+                     className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                   >
+                     <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
+                       <path d="M3 3h18v18H3V3z" stroke="currentColor" strokeWidth="1.5" />
+                     </svg>
+                     {!isCollapsed && <span className="text-sm font-medium">{t("Products")}</span>}
+                   </NavLink>
+                 </li>
                   <li>
                     <NavLink
-                      to="/products"
-                      className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
-                    >
-                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
-                        <path d="M3 3h18v18H3V3z" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                      {!isCollapsed && <span className="text-sm font-medium">{t("Products")}</span>}
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/payments"
+                      to="dashboard/payments"
                       className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
@@ -179,7 +182,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   </li>
                   <li>
                     <NavLink
-                      to="/orders"
+                      to="dashboard/orders"
                       className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
@@ -190,7 +193,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   </li>
                   <li>
                     <NavLink
-                      to="/statistics"
+                      to="dashboard/statistics"
                       className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
