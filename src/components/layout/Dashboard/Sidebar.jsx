@@ -160,7 +160,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                  <li>
                    <NavLink
                      to="dashboard/products"
-                     className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                     className=" before:hidden flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                    >
                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
                        <path d="M3 3h18v18H3V3z" stroke="currentColor" strokeWidth="1.5" />
@@ -171,7 +171,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   <li>
                     <NavLink
                       to="dashboard/payments"
-                      className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                      className="  before:hidden flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
                         <path d="M2 7h20v10H2V7z" stroke="currentColor" strokeWidth="1.5" />
@@ -183,7 +183,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   <li>
                     <NavLink
                       to="dashboard/orders"
-                      className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                      className=" before:hidden flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
                         <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -194,7 +194,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   <li>
                     <NavLink
                       to="dashboard/statistics"
-                      className="flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+                      className=" before:hidden flex items-center px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
                     >
                       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mr-3">
                         <path d="M4 20V10M12 20V4M20 20v-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

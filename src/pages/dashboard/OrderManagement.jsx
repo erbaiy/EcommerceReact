@@ -108,8 +108,8 @@ const OrderManagement = () => {
           <table className="min-w-full table-auto">
             <thead className="bg-slate-100 dark:bg-slate-800">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Order ID")}</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Customer ID")}</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Order")}</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Customer")}</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Total")}</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Status")}</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Date")}</th>
@@ -127,7 +127,7 @@ const OrderManagement = () => {
                     className="hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     <td className="px-6 py-4 whitespace-nowrap dark:text-white">{order._id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap dark:text-white">{order.customerId?.name || "John"}</td>                                        <td className="px-6 py-4 whitespace-nowrap dark:text-white">${order.total?.toFixed(2) || '0.00'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap dark:text-white">{order.customer?._id || "John"}</td>                                        <td className="px-6 py-4 whitespace-nowrap dark:text-white">${order.total?.toFixed(2) || '0.00'}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={getStatusBadge(order.isPayed)}>
                         {order.isPayed || 'pending'}

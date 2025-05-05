@@ -28,6 +28,8 @@ const Products = () => {
 
   // Fetch products on component mount
   useEffect(() => {
+    const userAuth=localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : "681206025014b1a41f7bea82";
+     console.log("userAuth",userAuth.id);
     const fetchProducts = async () => {
       setIsLoading(true);
       try {
@@ -55,6 +57,7 @@ const Products = () => {
 
   // Handle checkout
   const handleCheckout = async (product) => {
+    const userAuth=localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : "681206025014b1a41f7bea82";
     try {
       setIsLoading(true);
       console.log("Checkout productId:", product._id);
@@ -64,7 +67,7 @@ const Products = () => {
       }
       
       const response = await axiosInstance.post("http://localhost:3000/payments/checkout", {
-        customerId: '661deac80c1b898c6b177c2b',
+        customerId: userAuth.id,
         items: [{ productId: String(product._id), quantity: 1 }],
         price: 100,
         urlSuccess: 'http://localhost:5173/success',
@@ -249,17 +252,6 @@ const Productsection = ({
   return (
     <section className="py-12">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-            {t("Product List")}
-          </h2>
-          <button
-            onClick={onAddProduct}
-            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition duration-300"
-          >
-            {t("Add Product")}
-          </button>
-        </div>
 
         <SearchAndFilter
           searchTerm={searchTerm}

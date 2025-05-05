@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../config/axios';
+import {
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    Tooltip,
+    CartesianGrid,
+    ResponsiveContainer
+  } from 'recharts';
+  
 
 // Reusable stats card
 function StatsCard({ title, value, subtitle, icon }) {
@@ -14,6 +24,11 @@ function StatsCard({ title, value, subtitle, icon }) {
     </div>
   );
 }
+function getMonthLabel(month, year) {
+    const date = new Date(year, month - 1);
+    return date.toLocaleString('default', { month: 'short', year: '2-digit' });
+  }
+  
 
 export default function Statistics() {
   const [dashboard, setDashboard] = useState(null);
@@ -97,6 +112,28 @@ export default function Statistics() {
           icon="⚠️"
         />
       </div>
+      {/* Sales Chart */}
+      {sales?.monthlyBreakdown && sales.monthlyBreakdown.length > 0 && (
+  <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-4">
+    <h2 className="text-lg font-semibold dark:text-white mb-2">Orders per Month</h2>
+    <ResponsiveContainer width="100%" height={300}>
+      <LineChart
+        data={sales.monthlyBreakdown.map(item => ({
+          name: getMonthLabel(item.month, item.year),
+          orders: item.count,
+        }))}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" stroke="#ccc" />
+        <YAxis allowDecimals={false} stroke="#ccc" />
+        <Tooltip />
+        <Line type="monotone" dataKey="orders" stroke="#3b82f6" strokeWidth={2} />
+      </LineChart>
+    </ResponsiveContainer>
+  </div>
+)}
+
 
       {/* Low Stock Table */}
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-4">

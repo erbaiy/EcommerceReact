@@ -7,7 +7,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
   const { t } = useTranslation();
 
   const calculateTotal = () => {
-    return order.items.reduce((acc, item) => acc + item.menuItem.price * item.quantity, 0);
+    return order.items.reduce((acc, item) => acc +item.product.unitPrice, 0);
   };
 
   if (!isOpen || !order) return null;
@@ -36,20 +36,20 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
         <div className="p-6 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card icon={<User size={24} />} title={t('Customer')}>
-              <p className="text-gray-600 dark:text-gray-300">{order.client.fullName}</p>
+              <p className="text-gray-600 dark:text-gray-300">{order.customer.email}</p>
             </Card>
             <Card icon={<MapPin size={24} />} title={t('Address')}>
-              <p className="text-gray-600 dark:text-gray-300">{order.client.address}</p>
+              <p className="text-gray-600 dark:text-gray-300">{order.customer.address}</p>
             </Card>
             <Card icon={<Phone size={24} />} title={t('Phone')}>
-              <p className="text-gray-600 dark:text-gray-300">{order.client.phoneNumber}</p>
+              <p className="text-gray-600 dark:text-gray-300">{order.customer.phoneNumber}</p>
             </Card>
             <Card icon={<Clock size={24} />} title={t('Status')}>
               <span className={`px-2 py-1 rounded-full text-sm font-semibold
-                ${order.status === 'completed' ? 'bg-green-500 text-white' : 
-                  order.status === 'cancelled' ? 'bg-red-500 text-white' : 
+                ${order.isPayed === "completed" ? 'bg-green-500 text-white' : 
+                  order.isPayed === "pending" ? 'bg-red-500 text-white' : 
                   'bg-yellow-500 text-white text-sm font-medium'}`}>
-                {t(order.status)}
+                {t(order.isPayed)}
               </span>
             </Card>
           </div>
@@ -57,8 +57,8 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
             <ul className="space-y-2">
               {order.items?.map((item, index) => (
                 <li key={index} className="flex justify-between">
-                  <span className="dark:text-white">{item.menuItem.name} x{item.quantity}</span>
-                  <span className="dark:text-white">${item.menuItem.price?.toFixed(2) || '0.00'}</span>
+                  <span className="dark:text-white">x{item.quantity}</span>
+                  {/* <span className="dark:text-white">${item.menuItem.unitPrice?.toFixed(2) || '0.00'}</span> */}
                 </li>
               ))}
             </ul>
@@ -82,23 +82,23 @@ const Card = ({ icon, title, children }) => (
   </div>
 );
 
-OrderDetailsModal.propTypes = {
-  order: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    customerName: PropTypes.string.isRequired,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired,
-    })).isRequired,
-    total: PropTypes.number.isRequired,
-    status: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-  }),
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
+// OrderDetailsModal.propTypes = {
+//   order: PropTypes.shape({
+//     // id: PropTypes.number.isRequired,
+//     customerName: PropTypes.string.isRequired,
+//     items: PropTypes.arrayOf(PropTypes.shape({
+//       name: PropTypes.string.isRequired,
+//       quantity: PropTypes.number.isRequired,
+//       unitPrice: PropTypes.number.isRequired,
+//     })).isRequired,
+//     total: PropTypes.number.isRequired,
+//     status: PropTypes.string.isRequired,
+//     address: PropTypes.string.isRequired,
+//     phone: PropTypes.string.isRequired,
+//   }),
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+// };
 
 Card.propTypes = {
   icon: PropTypes.element.isRequired,

@@ -5,7 +5,8 @@ import { Search, Eye, Check, X, Loader } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast, Toaster } from "sonner"
 import axiosInstance from "../../config/axios"
-import OrderDetailsModal from "../../components/OrderDetailsModal"
+import OrderDetailsModal from "./OrderDetailsModal"
+
 
 const OrderManagement = () => {
   const { t } = useTranslation()
@@ -43,10 +44,25 @@ const OrderManagement = () => {
     setFilteredOrders(filtered)
   }, [searchTerm, orders])
 
+//  handle view details modal
   const handleViewDetails = (order) => {
     setSelectedOrder(order)
     setIsDetailsModalOpen(true)
-  }
+
+    return (
+        <OrderDetailsModal
+          order={selectedOrder} 
+          isOpen={isDetailsModalOpen} 
+          onClose={closeDetailsModal} 
+          onConfirm={handleConfirmOrder}
+        />
+      )
+}
+//  handle close modal 
+const closeDetailsModal = () => {
+  setIsDetailsModalOpen(false)
+  setSelectedOrder(null)
+}
 
   const handleConfirmOrder = async (orderId) => {
     try {
@@ -59,10 +75,6 @@ const OrderManagement = () => {
     }
   }
 
-  const closeDetailsModal = () => {
-    setIsDetailsModalOpen(false)
-    setSelectedOrder(null)
-  }
 
   const getStatusBadge = (status) => {
     const baseClass = "px-2 py-1 rounded-full text-xs font-medium"
@@ -108,7 +120,7 @@ const OrderManagement = () => {
             <thead className="bg-slate-100 dark:bg-slate-800">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Order ID")}</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Customer ID")}</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Customer ")}</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Total")}</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Status")}</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t("Date")}</th>
@@ -126,7 +138,7 @@ const OrderManagement = () => {
                     className="hover:bg-slate-50 dark:hover:bg-slate-800"
                   >
                     <td className="px-6 py-4 whitespace-nowrap dark:text-white">{order._id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap dark:text-white">{order.customerId}</td>
+                    <td className="px-6 py-4 whitespace-nowrap dark:text-white">{order.customer._id}</td>
                     <td className="px-6 py-4 whitespace-nowrap dark:text-white">${order.price?.toFixed(2) || '0.00'}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={getStatusBadge(order.status)}>
@@ -179,6 +191,10 @@ const OrderManagement = () => {
       </AnimatePresence>
     </div>
   )
+
+
+ 
+
 }
 
 export default OrderManagement

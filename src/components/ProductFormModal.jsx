@@ -9,7 +9,7 @@ const ProductFormModal = ({ product, isOpen, onClose, onSubmit, isEditMode }) =>
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    price: "",
+    unitPrice: "",
     stockQuantity: "",
   })
   const [errors, setErrors] = useState({})
@@ -19,14 +19,14 @@ const ProductFormModal = ({ product, isOpen, onClose, onSubmit, isEditMode }) =>
       setFormData({
         name: product.name || "",
         description: product.description || "",
-        price: (product.price || product.unitPrice || "").toString(),
+        unitPrice: (product.unitPrice || product.unitunitPrice || "").toString(),
         stockQuantity: (product.stockQuantity || "").toString(),
       })
     } else {
       setFormData({
         name: "",
         description: "",
-        price: "",
+        unitPrice: "",
         stockQuantity: "",
       })
     }
@@ -46,10 +46,10 @@ const ProductFormModal = ({ product, isOpen, onClose, onSubmit, isEditMode }) =>
   const validateForm = () => {
     const newErrors = {}
     if (!formData.name.trim()) newErrors.name = t("Name is required")
-    if (!formData.price.trim()) {
-      newErrors.price = t("Price is required")
-    } else if (isNaN(Number.parseFloat(formData.price)) || Number.parseFloat(formData.price) < 0) {
-      newErrors.price = t("Price must be a valid positive number")
+    if (!formData.unitPrice.trim()) {
+      newErrors.unitPrice = t("unitPrice is required")
+    } else if (isNaN(Number.parseFloat(formData.unitPrice)) || Number.parseFloat(formData.unitPrice) < 0) {
+      newErrors.unitPrice = t("unitPrice must be a valid positive number")
     }
     if (formData.stockQuantity.trim() && 
         (isNaN(Number.parseInt(formData.stockQuantity)) || Number.parseInt(formData.stockQuantity) < 0)) {
@@ -65,7 +65,7 @@ const ProductFormModal = ({ product, isOpen, onClose, onSubmit, isEditMode }) =>
     
     const submissionData = {
       ...formData,
-      price: Number.parseFloat(formData.price),
+      unitPrice: Number.parseFloat(formData.unitPrice),
       stockQuantity: formData.stockQuantity ? Number.parseInt(formData.stockQuantity) : 0,
     }
     onSubmit(submissionData)
@@ -137,23 +137,23 @@ const ProductFormModal = ({ product, isOpen, onClose, onSubmit, isEditMode }) =>
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="price" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t("Price")} *
+              <label htmlFor="unitPrice" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                {t("unitPrice")} *
               </label>
               <input
-                id="price"
-                name="price"
+                id="unitPrice"
+                name="unitPrice"
                 type="number"
                 step="0.01"
                 min="0"
-                value={formData.price}
+                value={formData.unitPrice}
                 onChange={handleChange}
-                placeholder={t("Enter price")}
+                placeholder={t("Enter unitPrice")}
                 className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                  errors.price ? "border-red-500" : "border-gray-300 dark:border-slate-600"
+                  errors.unitPrice ? "border-red-500" : "border-gray-300 dark:border-slate-600"
                 } bg-white dark:bg-slate-700 dark:text-white`}
               />
-              {errors.price && <p className="mt-1 text-sm text-red-500">{errors.price}</p>}
+              {errors.unitPrice && <p className="mt-1 text-sm text-red-500">{errors.unitPrice}</p>}
             </div>
 
             <div className="space-y-2">
